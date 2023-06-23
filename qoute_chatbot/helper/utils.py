@@ -11,9 +11,9 @@ def get_price(location: str) -> dict:
         response = json.loads(response.text)
         price = 0.0
         for r in response:
-            if r['ciudad'] == location:
+            if r['ciudad'].lower() == location.lower():
                 price += float(r['precio'])
-        
+                break
         if price == 0.0:
             return f"We don't have price for the {location}."
         else:
