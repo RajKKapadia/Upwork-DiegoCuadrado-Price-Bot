@@ -15,9 +15,9 @@ def get_price(location: str) -> dict:
                 price += float(r['precio'])
                 break
         if price == 0.0:
-            return f"We don't have price for the {location}."
+            return f"We don't have price for the {location.capitalize()}."
         else:
-            return f'The price of the location {location} is {round(price, 2)}.'
+            return f'The price of the location {location.capitalize()} is {round(price, 2)}.'
     except:
         return 'We are facing a technical issue at this time.'
     
