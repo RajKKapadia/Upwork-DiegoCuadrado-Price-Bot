@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from qoute_chatbot.helper.conversation import get_location
+from qoute_chatbot.helper.conversation import get_location, get_answer
 from qoute_chatbot.helper.twilio_api import send_message
 from qoute_chatbot.helper.utils import get_price
 from qoute_chatbot.logger import logging
@@ -29,7 +29,9 @@ def twilio():
         if location_info['status'] == 1 and location_info['location'] != -1:
             response = get_price(location_info['location'])
         else:
-            response = 'I did not get the location very clearly, can you rephrase that.'
+            response = get_answer(query)
+
+        print(response)
 
         logger.info(f'Sender -> {sender_id}')
         logger.info(f'Query -> {query}')
