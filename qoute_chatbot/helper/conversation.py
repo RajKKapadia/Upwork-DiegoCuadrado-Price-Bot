@@ -59,7 +59,7 @@ def azure_chat_completion(prompt: str) -> str:
                 },
                 {
                     "role": "user",
-                    "content": "what is the delivery time?"
+                    "content": prompt
                 }
             ],
             temperature=0.7,
