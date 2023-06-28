@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from qoute_chatbot.helper.conversation import get_location, get_answer
+from qoute_chatbot.helper.conversation import get_location, azure_chat_completion
 from qoute_chatbot.helper.twilio_api import send_message
 from qoute_chatbot.helper.utils import get_price
 from qoute_chatbot.logger import logging
@@ -29,7 +29,7 @@ def twilio():
         if location_info['status'] == 1 and location_info['location'] != -1:
             response = get_price(location_info['location'])
         else:
-            response = get_answer(query)
+            response = azure_chat_completion(query)
 
         print(response)
 
