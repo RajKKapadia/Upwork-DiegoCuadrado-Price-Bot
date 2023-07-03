@@ -38,6 +38,9 @@ def twilio():
 
         location_info = get_location(query)
 
+        logger.info(query)
+        logger.info(location_info)
+
         if location_info['status'] == 1 and location_info['location'] != -1:
             response = get_price(location_info['location'])
         else:
