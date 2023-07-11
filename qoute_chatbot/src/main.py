@@ -2,7 +2,8 @@ from datetime import datetime
 
 from flask import Flask, request
 
-from qoute_chatbot.helper.conversation import get_location, azure_chat_completion
+from qoute_chatbot.helper.conversation import get_location
+from qoute_chatbot.helper.azure_conversation import azure_chat_completion
 from qoute_chatbot.helper.twilio_api import send_message
 from qoute_chatbot.helper.utils import get_price, generate_messages
 from qoute_chatbot.logger import logging
