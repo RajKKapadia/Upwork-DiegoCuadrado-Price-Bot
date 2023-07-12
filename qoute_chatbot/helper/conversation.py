@@ -22,11 +22,13 @@ def get_location(query: str) -> str:
         partial_variables={"format_instructions": format_instructions}
     )
     try:
-        chat = ChatOpenAI(temperature=0, openai_api_key=config.OPENAI_API_KEY)
+        chat = ChatOpenAI(temperature=0, openai_api_key=config.OPENAI_API_KEY, openai_api_base='')
         print(chat)
         _input = prompt.format_prompt(question=query)
         response = chat(_input.to_messages())
+        print(response)
         output = output_parser.parse(response.content)
+        print(output)
         return {
             'status': 1,
             'location': output['location']
