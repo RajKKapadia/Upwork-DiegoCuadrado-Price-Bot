@@ -37,16 +37,20 @@ def twilio():
         else:
             messages = generate_messages([], query)
 
-        location_info = get_location(query)
+        parameters = get_location(query)
 
         logger.info(query)
         logger.info(sender_id)
-        logger.info(location_info)
+        logger.info(parameters)
 
-        if location_info['status'] == 1 and location_info['location'] != -1:
-            response = get_price(location_info['location'])
+        if parameters['status'] == 1 and parameters['location'] != -1 and parameters['quantity'] != -1:
+            response = get_price(parameters['location'], parameters['quantity'])
+        elif parameters['status'] == 1 and parameters['location'] != -1 and parameters['quantity'] == -1:
+            response = get_price(parameters['location'])
         else:
             response = azure_chat_completion(messages)
+
+        logger.info(response)
 
         if user:
             update_messages(sender_id, query,
