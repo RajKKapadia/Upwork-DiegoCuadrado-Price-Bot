@@ -18,7 +18,7 @@ def get_price(location: str, quantity: int = 0) -> dict:
         if price == 0.0:
             return f"We don't have price for the {location.capitalize()}."
         elif price != 0.0 and quantity != 0:
-            return f'El precio para {location.capitalize()} es: {round(price, 2)} amd for 400 liters that will be {round(int(quantity)*price, 2)}.'
+            return f'El precio para {location.capitalize()} es: {round(price, 2)} and for {quantity} liters that will be {round(int(quantity)*price, 2)}.'
         else:
             return f'El precio para {location.capitalize()} es: {round(price, 2)}'
     except:

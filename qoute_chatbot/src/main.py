@@ -6,11 +6,7 @@ from qoute_chatbot.helper.conversation import get_location
 from qoute_chatbot.helper.azure_conversation import azure_chat_completion
 from qoute_chatbot.helper.twilio_api import send_message
 from qoute_chatbot.helper.utils import get_price, generate_messages
-from qoute_chatbot.logger import logging
-from qoute_chatbot.helper.database_api import create_user, update_messages, get_user
-
-logger = logging.getLogger(__name__)
-
+from qoute_chatbot.helper.database_api import create_user, update_messages, get_user\
 
 app = Flask(__name__)
 
@@ -23,7 +19,7 @@ def home():
 @app.route('/twilio', methods=['POST'])
 def twilio():
     try:
-        logger.info('A new twilio request...')
+        print('A new twilio request...')
         data = request.form.to_dict()
         query = data['Body']
         sender_id = data['From']
@@ -39,9 +35,9 @@ def twilio():
 
         parameters = get_location(query)
 
-        logger.info(query)
-        logger.info(sender_id)
-        logger.info(parameters)
+        print(query)
+        print(sender_id)
+        print(parameters)
 
         if parameters['status'] == 1 and parameters['location'] != -1 and parameters['quantity'] != -1:
             response = get_price(parameters['location'], parameters['quantity'])
@@ -50,7 +46,7 @@ def twilio():
         else:
             response = azure_chat_completion(messages)
 
-        logger.info(response)
+        print(response)
 
         if user:
             update_messages(sender_id, query,
@@ -74,9 +70,9 @@ def twilio():
             }
             create_user(user)
         send_message(sender_id, response)
-        logger.info('Request success.')
+        print('Request success.')
     except:
-        logger.info('Request failed.')
+        print('Request failed.')
         pass
 
     return 'OK', 200
