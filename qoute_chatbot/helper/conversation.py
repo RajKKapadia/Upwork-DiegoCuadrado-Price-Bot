@@ -25,6 +25,7 @@ def get_location(query: str) -> str:
     )
     try:
         chat = ChatOpenAI(temperature=0, openai_api_key=config.OPENAI_API_KEY, openai_api_base='')
+        print(chat)
         _input = prompt.format_prompt(question=query)
         response = chat(_input.to_messages())
         output = output_parser.parse(response.content)
